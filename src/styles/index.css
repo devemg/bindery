@@ -218,6 +218,38 @@
   textarea.input {
     @apply min-h-textarea resize-y leading-relaxed;
   }
+  .rich-text-editor {
+    @apply min-h-textarea whitespace-normal leading-relaxed;
+  }
+  .rich-text-editor:empty::before {
+    content: attr(data-placeholder);
+    @apply text-ink-dim;
+  }
+  .rich-text-tool {
+    @apply min-h-0 px-8 py-3 text-sm;
+  }
+  .chips-input {
+    @apply flex min-h-control w-full flex-wrap items-center gap-6 rounded-md border border-line-divider bg-surface px-10 py-6;
+    caret-color: theme(colors.accent.DEFAULT);
+  }
+  .chips-input:focus-within {
+    @apply border-accent;
+  }
+  .chip {
+    @apply inline-flex items-center gap-4 rounded-sm bg-tint-strong px-8 py-3 text-sm text-accent-300;
+  }
+  .chip-remove {
+    @apply inline-flex h-14 w-14 items-center justify-center rounded-full text-accent-300;
+  }
+  .chip-remove:hover {
+    @apply bg-accent text-accent-100;
+  }
+  .chip-input {
+    @apply min-w-0 flex-1 border-0 bg-transparent p-0 font-body text-ui text-ink outline-none;
+  }
+  .chip-input::placeholder {
+    @apply text-ink-dim;
+  }
 
   .seg {
     @apply inline-flex overflow-hidden rounded-md border border-line-divider;

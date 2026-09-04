@@ -1,4 +1,5 @@
 import type { OpfDocument } from './parseOpf';
+import { sanitizeHtml } from '../sanitizeHtml';
 import type { BookMetadata, ReadingDirection } from './types';
 import {
   type XmlNode,
@@ -10,6 +11,7 @@ import {
   setAttribute,
   setChildren,
   setText,
+  parseXml,
   tagOf,
 } from './xml';
 
@@ -159,13 +161,24 @@ function setDublinCore(
 
   const first = existing[0];
   if (first) {
-    setText(first, trimmed);
+    if (name === 'description') setRichText(first, trimmed);
+    else setText(first, trimmed);
     return first;
   }
 
-  const created = createElement(`${prefix}${name}`, {}, trimmed);
+  const created =
+    name === 'description'
+      ? createElement(`${prefix}${name}`)
+      : createElement(`${prefix}${name}`, {}, trimmed);
+  if (name === 'description') setRichText(created, trimmed);
   appendToMetadata(document, created);
   return created;
+}
+
+function setRichText(node: XmlNode, value: string): void {
+  const safe = sanitizeHtml(value).replace(/<br\s*>/gi, '<br/>');
+  const root = parseXml(`<root>${safe}</root>`)[0];
+  setChildren(node, root ? childrenOf(root) : []);
 }
 
 /**

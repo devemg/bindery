@@ -265,11 +265,11 @@ describe('parseOpf — unusual but legal files', () => {
     expect(out).toContain('<dcterms:publisher>Gallimard</dcterms:publisher>');
   });
 
-  it('reads a description that contains markup as plain text', () => {
+  it('reads a description that contains safe markup as rich text', () => {
     const withMarkup = EPUB3_OPF.replace(
       '<dc:description>The Surprise is sent into the Pacific after an American frigate.</dc:description>',
       '<dc:description>The <em>Surprise</em> sails.</dc:description>',
     );
-    expect(parseOpf(withMarkup).metadata.summary).toBe('The Surprise sails.');
+    expect(parseOpf(withMarkup).metadata.summary).toBe('The <em>Surprise</em> sails.');
   });
 });

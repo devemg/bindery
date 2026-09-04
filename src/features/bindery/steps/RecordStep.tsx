@@ -1,6 +1,8 @@
 import { CORE_FIELDS, EXTRA_FIELDS, type ReadingDirection } from '../../../lib/epub/types';
 import { DisclosurePanel } from '../components/DisclosurePanel';
 import { FieldRow } from '../components/FieldRow';
+import { ChipsInput } from '../components/ChipsInput';
+import { RichTextEditor } from '../components/RichTextEditor';
 import { SegmentedControl, type SegmentOption } from '../components/SegmentedControl';
 import { useBinderyContext } from '../state/binderyContext';
 
@@ -16,16 +18,28 @@ export function RecordStep() {
     <div className="flex max-w-record flex-col gap-20">
       <h2 className="font-heading text-h2 font-normal">The record</h2>
 
-      {CORE_FIELDS.map((spec) => (
-        <FieldRow
-          key={spec.key}
-          spec={spec}
-          value={state.meta[spec.key]}
-          onChange={(value) => {
-            actions.setField(spec.key, value);
-          }}
-        />
-      ))}
+      {CORE_FIELDS.map((spec) =>
+        spec.key === 'summary' ? (
+          <RichTextEditor
+            key={spec.key}
+            label={spec.label}
+            placeholder={spec.placeholder}
+            value={state.meta.summary}
+            onChange={(value) => {
+              actions.setField('summary', value);
+            }}
+          />
+        ) : (
+          <FieldRow
+            key={spec.key}
+            spec={spec}
+            value={state.meta[spec.key]}
+            onChange={(value) => {
+              actions.setField(spec.key, value);
+            }}
+          />
+        ),
+      )}
 
       <DisclosurePanel
         isOpen={state.showMore}
@@ -34,16 +48,28 @@ export function RecordStep() {
         openLabel="Fewer fields"
       >
         <div className="grid grid-cols-pair gap-x-20 gap-y-16 rounded-md bg-panel p-20 shadow-sm">
-          {EXTRA_FIELDS.map((spec) => (
-            <FieldRow
-              key={spec.key}
-              spec={spec}
-              value={state.meta[spec.key]}
-              onChange={(value) => {
-                actions.setField(spec.key, value);
-              }}
-            />
-          ))}
+          {EXTRA_FIELDS.map((spec) =>
+            spec.key === 'tags' ? (
+              <ChipsInput
+                key={spec.key}
+                label={spec.label}
+                placeholder={spec.placeholder}
+                value={state.meta.tags}
+                onChange={(value) => {
+                  actions.setField('tags', value);
+                }}
+              />
+            ) : (
+              <FieldRow
+                key={spec.key}
+                spec={spec}
+                value={state.meta[spec.key]}
+                onChange={(value) => {
+                  actions.setField(spec.key, value);
+                }}
+              />
+            ),
+          )}
 
           <div className="col-span-full">
             <SegmentedControl

@@ -1,4 +1,5 @@
 import { EpubError } from './errors';
+import { sanitizeHtml } from '../sanitizeHtml';
 import { type BookMetadata, EMPTY_METADATA, type ReadingDirection } from './types';
 import {
   type XmlNode,
@@ -8,6 +9,7 @@ import {
   getAttributeByLocalName,
   isElement,
   parseXml,
+  tagOf,
   textOf,
 } from './xml';
 
@@ -82,6 +84,10 @@ function readMetadata(document: OpfDocument): BookMetadata {
     const node = dc(name)[0];
     return node ? textOf(node).trim() : '';
   };
+  const firstRichText = (name: string): string => {
+    const node = dc(name)[0];
+    return node ? sanitizeHtml(htmlOf(node)) : '';
+  };
 
   const series = readSeries(children);
 
@@ -89,7 +95,7 @@ function readMetadata(document: OpfDocument): BookMetadata {
     ...EMPTY_METADATA,
     title: firstText('title'),
     author: firstText('creator'),
-    summary: firstText('description'),
+    summary: firstRichText('description'),
     language: firstText('language') || EMPTY_METADATA.language,
     publisher: firstText('publisher'),
     pubdate: readPublicationDate(dc('date')),
@@ -101,6 +107,21 @@ function readMetadata(document: OpfDocument): BookMetadata {
     series: series.name,
     seriesNo: series.position,
   };
+}
+
+const RICH_TAGS = new Set(['b', 'br', 'em', 'i', 'li', 'ol', 'p', 's', 'strong', 'u', 'ul', 'a']);
+
+function htmlOf(node: XmlNode): string {
+  if (tagOf(node) === '#text') {
+    const value = node['#text'];
+    return (typeof value === 'string' ? value : '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+  const tag = tagOf(node).toLowerCase();
+  const children = childrenOf(node).map(htmlOf).join(' ');
+  return RICH_TAGS.has(tag) ? `<${tag}>${children}</${tag}>` : children;
 }
 
 /**
