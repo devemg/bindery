@@ -15,8 +15,11 @@ export function RecordStep() {
   const { state, actions } = useBinderyContext();
 
   return (
-    <div className="flex max-w-record flex-col gap-20">
-      <h2 className="font-heading text-h2 font-normal">The record</h2>
+    <div className="wizard-panel flex max-w-record flex-col gap-20">
+      <h2 className="font-heading text-h2 font-normal">
+        The record
+        <span className="mobile-step-label">Step 3 of 4</span>
+      </h2>
 
       {CORE_FIELDS.map((spec) =>
         spec.key === 'summary' ? (

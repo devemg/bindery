@@ -15,7 +15,19 @@ interface StepperProps {
  */
 export function Stepper({ current, onGoToStep }: StepperProps) {
   return (
-    <nav aria-label="Rebinding steps">
+    <nav className="wizard-stepper" aria-label="Rebinding steps">
+      <div className="wizard-mobile-progress" aria-hidden="true">
+        {STEP_NAMES.map((name, index) => (
+          <span
+            key={name}
+            className={cx(
+              'wizard-progress-mark',
+              index < current && 'is-done',
+              index === current && 'is-current',
+            )}
+          />
+        ))}
+      </div>
       <ol className="flex list-none items-center">
         {STEP_NAMES.map((name, index) => {
           const step = index as Step;

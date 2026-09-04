@@ -251,6 +251,14 @@
     @apply text-ink-dim;
   }
 
+  .wizard-mobile-progress {
+    display: none;
+  }
+
+  .mobile-step-label {
+    display: none;
+  }
+
   .seg {
     @apply inline-flex overflow-hidden rounded-md border border-line-divider;
   }
@@ -296,5 +304,230 @@
         transparent
       )
       no-repeat bottom / 100% 1px;
+  }
+}
+
+@media (max-width: 640px) {
+  .wizard-shell {
+    align-items: stretch;
+    gap: 0;
+    min-height: 100svh;
+    padding: 0 0 24px;
+  }
+
+  .wizard-content {
+    margin: 0;
+    max-width: none;
+    gap: 0;
+  }
+
+  .wizard-header {
+    align-items: center;
+    gap: 0;
+    padding: 14px 20px 12px;
+  }
+
+  .wizard-header > div {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .wizard-header svg {
+    width: 30px;
+    height: 30px;
+    margin-top: 0;
+  }
+
+  .wizard-header .plate {
+    display: none;
+  }
+
+  .wizard-header h1 {
+    font-size: 19px;
+    letter-spacing: 0;
+  }
+
+  .wizard-description {
+    display: none;
+  }
+
+  .wizard-stepper {
+    padding: 0 20px 4px;
+  }
+
+  .wizard-stepper > ol {
+    display: none;
+  }
+
+  .wizard-mobile-progress {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .wizard-progress-mark {
+    height: 2px;
+    flex: 1;
+    border-radius: 1px;
+    background: theme(colors.line.DEFAULT);
+  }
+
+  .wizard-progress-mark.is-done {
+    background: theme(colors.accent.700);
+  }
+
+  .wizard-progress-mark.is-current {
+    background: theme(colors.accent.DEFAULT);
+  }
+
+  .wizard-content > section {
+    gap: 0;
+  }
+
+  .wizard-panel {
+    display: flex;
+    width: auto;
+    max-width: none;
+    flex-direction: column;
+    gap: 14px;
+    padding: 12px 20px 0;
+  }
+
+  .wizard-panel > h2 {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0;
+    font-size: 23px;
+  }
+
+  .mobile-step-label {
+    display: inline;
+    margin-left: auto;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 9.5px;
+    font-weight: 400;
+    letter-spacing: theme(letterSpacing.plate);
+    text-transform: uppercase;
+    color: theme(colors.ink.faint);
+  }
+
+  .wizard-panel > div > h2 {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0;
+    font-size: 23px;
+  }
+
+  .wizard-panel > div > h2 .mobile-step-label {
+    margin-left: auto;
+  }
+
+  .wizard-panel label[for] {
+    flex: none;
+  }
+
+  .wizard-panel > div:first-child {
+    width: 100%;
+  }
+
+  .wizard-panel .relative.flex.cursor-pointer {
+    align-items: center;
+    padding: 40px 22px;
+    text-align: center;
+  }
+
+  .wizard-panel .relative.flex.cursor-pointer > span {
+    align-items: center;
+  }
+
+  .wizard-aside {
+    display: none;
+  }
+
+  .wizard-preview {
+    align-self: center;
+    padding: 12px 12px 24px;
+    border-radius: 14px;
+    background: theme(colors.shell);
+    box-shadow: theme(boxShadow.md);
+  }
+
+  .wizard-preview .device-preview-shell {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .wizard-preview .device-preview-screen {
+    width: 168px;
+    height: 269px;
+    border-radius: 3px;
+  }
+
+  .wizard-nav {
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 14px 20px 30px;
+    border-top: 1px solid theme(colors.line.dead);
+  }
+
+  .wizard-nav > div:first-child {
+    flex: none;
+  }
+
+  .wizard-nav > div:last-child {
+    flex: 1;
+    gap: 12px;
+  }
+
+  .wizard-nav .plate {
+    display: none;
+  }
+
+  .wizard-nav .btn {
+    min-height: 46px;
+    font-size: 15px;
+  }
+
+  .wizard-nav .btn-primary {
+    flex: 1;
+  }
+
+  .wizard-panel .input {
+    min-height: 46px;
+    font-size: 15px;
+  }
+
+  .wizard-panel textarea.input {
+    resize: none;
+  }
+
+  .wizard-panel .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .wizard-panel .grid > .col-span-full {
+    width: auto;
+  }
+
+  .wizard-panel .rich-text-editor {
+    min-height: 90px;
+    font-size: 14px;
+  }
+
+  .wizard-panel .chips-input {
+    min-height: 46px;
+  }
+
+  footer {
+    padding: 18px 20px 0;
   }
 }

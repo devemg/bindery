@@ -13,9 +13,9 @@ interface DevicePreviewProps {
  */
 export function DevicePreview({ coverUrl, fit }: DevicePreviewProps) {
   return (
-    <div className="flex flex-col items-center gap-12">
-      <div className="rounded-shell bg-shell p-16 pb-34 shadow-md">
-        <div className="flex h-378 w-236 items-center justify-center overflow-hidden rounded-screen-lg bg-screen">
+    <div className="device-preview flex flex-col items-center gap-12">
+      <div className="device-preview-shell rounded-shell bg-shell p-16 pb-34 shadow-md">
+        <div className="device-preview-screen flex h-378 w-236 items-center justify-center overflow-hidden rounded-screen-lg bg-screen">
           {coverUrl ? (
             <img
               src={coverUrl}

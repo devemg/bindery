@@ -16,19 +16,17 @@ interface NavBarProps {
 
 export function NavBar({ step, hint, onBack, onForward, onReset, state }: NavBarProps) {
   return (
-    <div className="rule-fade-t flex items-center justify-between gap-16 pt-10">
+    <div className="wizard-nav rule-fade-t flex items-center justify-between gap-16 pt-10">
       {/* Kept in the layout on step 1 so the row does not shift. */}
-      <div className="flex items-center gap-10">
-        <button
-          type="button"
-          onClick={onBack}
-          className={cx('btn btn-ghost', FOCUS, step === 0 && 'invisible')}
-        >
-          Back
-        </button>
-      </div>
+      {step > 0 && (
+        <div className="flex items-center gap-10">
+          <button type="button" onClick={onBack} className={cx('btn btn-ghost', FOCUS)}>
+            Back
+          </button>
+        </div>
+      )}
 
-      <div className="flex items-center gap-14">
+      <div className="flex flex-auto items-center gap-14">
         <span className="plate plate-note">{hint}</span>
         {step === LAST_STEP && (
           <button type="button" onClick={onReset} className={cx('btn btn-ghost', FOCUS)}>

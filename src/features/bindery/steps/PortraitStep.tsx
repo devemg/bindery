@@ -20,12 +20,16 @@ export function PortraitStep() {
   return (
     <div
       className={cx(
+        'wizard-panel',
         'grid items-start gap-34',
         settings.showKindlePreview ? 'grid-cols-portrait' : 'grid-cols-portrait-solo',
       )}
     >
       <div className="flex flex-col gap-16">
-        <h2 className="font-heading text-h2 font-normal">The portrait</h2>
+        <h2 className="font-heading text-h2 font-normal">
+          The portrait
+          <span className="mobile-step-label">Step 2 of 4</span>
+        </h2>
 
         <DropZone variant="inline" accept="image/*" onFile={actions.selectCover}>
           <ImageIcon size={22} className="text-accent" />
@@ -50,7 +54,11 @@ export function PortraitStep() {
         {lowRes && <Notice>{lowRes}</Notice>}
       </div>
 
-      {settings.showKindlePreview && <DevicePreview coverUrl={state.coverUrl} fit={state.fit} />}
+      {settings.showKindlePreview && (
+        <div className="wizard-preview">
+          <DevicePreview coverUrl={state.coverUrl} fit={state.fit} />
+        </div>
+      )}
     </div>
   );
 }

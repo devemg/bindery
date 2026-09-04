@@ -8,9 +8,12 @@ export function UploadStep() {
   const { state, actions } = useBinderyContext();
 
   return (
-    <div className="grid grid-cols-upload items-start gap-28">
-      <div className="flex flex-col gap-14">
-        <h2 className="font-heading text-h2 font-normal">The book file</h2>
+    <div className="wizard-panel grid grid-cols-upload items-start gap-28">
+      <div className="flex w-full flex-col gap-14">
+        <h2 className="font-heading text-h2 font-normal">
+          The book file
+          <span className="mobile-step-label">Step 1 of 4</span>
+        </h2>
 
         <DropZone variant="tall" accept=".epub,application/epub+zip" onFile={actions.selectEpub}>
           <UploadFileIcon size={26} className="text-accent" />
@@ -35,7 +38,7 @@ export function UploadStep() {
         {state.loadError && <Notice>{state.loadError.message}</Notice>}
       </div>
 
-      <aside className="flex flex-col gap-10 rounded-md bg-panel px-20 pb-22 pt-20 shadow-sm">
+      <aside className="wizard-aside flex flex-col gap-10 rounded-md bg-panel px-20 pb-22 pt-20 shadow-sm">
         <span className="plate">Ex libris</span>
         <p className="text-pretty text-prose leading-loose text-ink-muted">
           Nothing leaves this page. The file is opened locally, the portrait swapped, the record

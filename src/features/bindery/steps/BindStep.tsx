@@ -12,9 +12,12 @@ export function BindStep() {
   const isBuilding = build.kind === 'building';
 
   return (
-    <div className="grid grid-cols-bind items-start gap-34">
+    <div className="wizard-panel grid grid-cols-bind items-start gap-34">
       <div className="flex flex-col gap-18">
-        <h2 className="font-heading text-h2 font-normal">Ready to bind</h2>
+        <h2 className="font-heading text-h2 font-normal">
+          Ready to bind
+          <span className="mobile-step-label">Step 4 of 4</span>
+        </h2>
 
         <SummaryTable rows={summaryRows(state)} />
 
