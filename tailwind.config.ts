@@ -267,6 +267,8 @@ export default {
     outlineOffset: { 0: '0px', 2: '2px' },
 
     extend: {
+      /** The summary table's label column. */
+      width: { 'label-col': '34%' },
       opacity: { 45: '0.45' },
       aspectRatio: { kindle: '1600 / 2560' },
       zIndex: { 1: '1' },
