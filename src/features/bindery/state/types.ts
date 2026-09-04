@@ -50,6 +50,7 @@ export type BinderyAction =
   | { type: 'step/goto'; step: Step }
   | { type: 'step/back' }
   | { type: 'step/forward' }
+  | { type: 'wizard/reset'; defaultFit: Fit }
   | { type: 'epub/reading'; name: string; size: number }
   | {
       type: 'epub/read';

@@ -8,22 +8,30 @@ interface NavBarProps {
   readonly hint: string;
   readonly onBack: () => void;
   readonly onForward: () => void;
+  readonly onReset: () => void;
 }
 
-export function NavBar({ step, hint, onBack, onForward }: NavBarProps) {
+export function NavBar({ step, hint, onBack, onForward, onReset }: NavBarProps) {
   return (
     <div className="rule-fade-t flex items-center justify-between gap-16 pt-10">
       {/* Kept in the layout on step 1 so the row does not shift. */}
-      <button
-        type="button"
-        onClick={onBack}
-        className={cx('btn btn-ghost', FOCUS, step === 0 && 'invisible')}
-      >
-        Back
-      </button>
+      <div className="flex items-center gap-10">
+        <button
+          type="button"
+          onClick={onBack}
+          className={cx('btn btn-ghost', FOCUS, step === 0 && 'invisible')}
+        >
+          Back
+        </button>
+      </div>
 
       <div className="flex items-center gap-14">
         <span className="plate plate-note">{hint}</span>
+        {step === LAST_STEP && (
+          <button type="button" onClick={onReset} className={cx('btn btn-ghost', FOCUS)}>
+            Start again
+          </button>
+        )}
         {step < LAST_STEP && (
           <button type="button" onClick={onForward} className={cx('btn btn-primary', FOCUS)}>
             {step === 2 ? 'Review' : 'Continue'}

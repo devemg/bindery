@@ -17,6 +17,7 @@ export interface BinderyActions {
   goToStep: (step: Step) => void;
   back: () => void;
   forward: () => void;
+  reset: () => void;
   selectEpub: (file: File) => void;
   selectCover: (file: File) => void;
   setField: (field: MetadataField, value: string) => void;
@@ -122,6 +123,9 @@ export function useBindery(settings: BinderySettings): Bindery {
       },
       forward: () => {
         dispatch({ type: 'step/forward' });
+      },
+      reset: () => {
+        dispatch({ type: 'wizard/reset', defaultFit: settings.defaultFit });
       },
       selectEpub,
       selectCover: (file) => {

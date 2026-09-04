@@ -38,6 +38,9 @@ export function binderyReducer(state: BinderyState, action: BinderyAction): Bind
     case 'step/forward':
       return state.step === LAST_STEP ? state : { ...state, step: clampStep(state.step + 1) };
 
+    case 'wizard/reset':
+      return initialState(action.defaultFit);
+
     case 'epub/reading':
       return {
         ...state,

@@ -24,8 +24,8 @@ export function BinderyWizard() {
   const Panel = PANELS[state.step];
 
   return (
-    <div className="flex min-h-screen flex-col justify-between gap-16 bg-page px-40 pb-64 pt-44 font-body text-ink">
-      <div className="mx-auto flex max-w-page flex-col gap-34">
+    <div className="flex min-h-screen flex-col items-center justify-between gap-16 bg-page px-40 pb-64 pt-44 font-body text-ink">
+      <div className="mx-16 flex w-full max-w-page flex-col gap-34">
         <Header />
         <Stepper current={state.step} onGoToStep={actions.goToStep} />
 
@@ -36,6 +36,7 @@ export function BinderyWizard() {
             hint={hintFor(state)}
             onBack={actions.back}
             onForward={actions.forward}
+            onReset={actions.reset}
           />
         </section>
       </div>
