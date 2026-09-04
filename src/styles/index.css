@@ -255,7 +255,7 @@
     @apply inline-flex overflow-hidden rounded-md border border-line-divider;
   }
   .seg-opt {
-    @apply inline-flex cursor-pointer items-center gap-6 border border-line bg-transparent px-12 py-7 font-body text-sm font-normal text-ink-dim;
+    @apply inline-flex cursor-pointer items-center gap-6 border-line bg-transparent px-12 py-7 font-body text-sm font-normal text-ink-dim;
   }
   .seg-opt + .seg-opt {
     @apply -ml-px;

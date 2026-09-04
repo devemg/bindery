@@ -37,6 +37,7 @@ export function BinderyWizard() {
             onBack={actions.back}
             onForward={actions.forward}
             onReset={actions.reset}
+            state={state}
           />
         </section>
       </div>

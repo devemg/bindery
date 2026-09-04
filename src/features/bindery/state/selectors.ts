@@ -5,11 +5,21 @@ import type { BinderyState } from './types';
 const EMPTY = '—';
 
 /**
- * Step 1 is the only gate: there is nothing to rebind without a book. Every
- * other hint in the design is advisory, exactly as the handoff specifies.
+ * Each Continue button is gated by the minimum information needed to enter
+ * the next step. Keeping this derived from state also keeps disabled styling
+ * and keyboard activation consistent.
  */
 export function canContinue(state: BinderyState): boolean {
-  return state.step === 0 ? state.archive !== null : true;
+  switch (state.step) {
+    case 0:
+      return state.archive !== null && !state.isReading;
+    case 1:
+      return true;
+    case 2:
+      return state.meta.title.trim().length > 0;
+    case 3:
+      return false;
+  }
 }
 
 /** The advisory note beside the Continue button, empty once it is satisfied. */
